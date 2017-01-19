@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>REACT COMPONENT DEV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  </head>
+  <body>
+      <div class="root page">
+      </div>
+      <button id="btn1">alert</button>
+      <button id="btn2">alert2</button>
+      <button id="btn3">confirm1</button>
+      <button id="btn4">confirm2</button>
+      <button id="btn5">loading</button>
+      <h5>说明</5>
+      <p>在DEMO中,将变量<strong>T</strong>保存为全局变量，可以打开控制台，直接调用T对象的相关方法测试</p>
+  </body>
+  <script>
+      document.body.addEventListener('touchstart', function () { });
+  </script>
+  <script src="vendor.bundle.js"></script>
+  <script src="bundle.js"></script>
+  <script>
+      document.getElementById('btn1').onclick = function(){
+        T.alert('hello world');
+      }
+  
+      document.getElementById('btn2').onclick = function(){
+        T.alert({
+            title: 'hello world',
+            message: 'This is details for hello world his is details for hello world',
+            text: '好的',
+            fn: function(){
+              alert('good');
+            }
+        });
+      }
+
+      document.getElementById('btn3').onclick = function(){
+          T.confirm({
+              title: '下班事件到了，可以下班了',
+              // message: '你说呢',
+              option: [{
+                  text: '确定',
+                  fn: function(){
+                    alert('我下班了');
+                  }
+              }, {
+                  text: '取消',
+                  fn: function(){
+                    alert('算了吧，我要加班');
+                  }
+              }]
+          });
+      }
+      document.getElementById('btn4').onclick = function(){
+          T.confirm({
+              title: '女神美吗',
+              // message: '你说呢',
+              option: [{
+                  text: '很美',
+                  fn: function(){
+                    alert('很美');
+                  }
+              }, {
+                  text: '一般般',
+                  fn: function(){
+                    alert('一般般');
+                  }
+              }, {
+                  text: '很难看',
+                  fn: function(){
+                    alert('很难看');
+                  }
+              }, {
+                  text: '不行',
+                  fn: function(){
+                    alert('不行');
+                  }
+              }]
+          });
+      }
+    document.getElementById('btn5').onclick = function(){
+        T.loading();
+    }
+  </script>
+</html>
