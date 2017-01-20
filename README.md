@@ -4,7 +4,7 @@
 可以在react\react-redux项目中使用
 ## DEMO地址
 
-[https://ray0324.github.io/toast/demo/](https://ray0324.github.io/toast/demo/)
+[https://ray0324.github.io/react-toast/demo/](https://ray0324.github.io/react-toast/demo/)
 
 ## 使用方法
 
