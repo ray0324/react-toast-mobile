@@ -1,4 +1,4 @@
-import { SHOW_LOADING, HIDE_LOADING, SHOW_CONFIRM, SHOW_ALERT, SHOW_NOTICE, CLEAR } from './constants';
+import * as TYPES from './types';
 
 class EventService {
     constructor() {
@@ -11,6 +11,7 @@ class EventService {
         }
         this.registry[key].push(callback);
     }
+
     // 解除事件绑定
     off(key, callback) {
         if(typeof this.registry[key] === 'undefined') {
@@ -24,6 +25,12 @@ class EventService {
             }
         }
     }
+
+    //解除所有绑定
+    clearAllEvents() {
+        this.registry = {};
+    }
+
     // 触发事件
     emit(key, args) {
         if (typeof this.registry[key] === 'undefined') {
@@ -39,10 +46,15 @@ class EventService {
 export const E = new EventService();
 
 export const T = {
-    loading: () => E.emit(SHOW_LOADING),
-    loaded: () => E.emit(HIDE_LOADING),
-    confirm: args => E.emit(SHOW_CONFIRM, args),
-    alert: args => E.emit(SHOW_ALERT, args),
-    notify: (...args) => E.emit(SHOW_NOTICE, args),
-    clear: () => E.emit(CLEAR)
+    loading: () => E.emit(TYPES.SHOW_LOADING),
+    loaded: () => E.emit(TYPES.HIDE_LOADING),
+    confirm: args => E.emit(TYPES.SHOW_CONFIRM, args),
+    alert: args => E.emit(TYPES.SHOW_ALERT, args),
+    notify: args => E.emit(TYPES.SHOW_NOTICE, args),
+    progress: {
+        start: () => E.emit(TYPES.SHOW_PROGRESS),
+        set: progress => E.emit(TYPES.SET_PROGRESS, progress),
+        done: () => E.emit(TYPES.HIDE_PROGRESS)
+    },
+    clear: () => E.emit(TYPES.CLEAR)
 };

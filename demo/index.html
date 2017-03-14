@@ -13,7 +13,8 @@
       <button id="btn3">confirm1</button>
       <button id="btn4">confirm2</button>
       <button id="btn5">loading</button>
-      <h5>说明</5>
+      <button id="btn6">notify</button>
+      <h5>说明</h5>
       <p>在DEMO中,将变量<strong>T</strong>保存为全局变量，可以打开控制台，直接调用T对象的相关方法测试</p>
   </body>
   <script>
@@ -83,6 +84,9 @@
       }
     document.getElementById('btn5').onclick = function(){
         T.loading();
+    }
+    document.getElementById('btn6').onclick = function(){
+        T.notify('hello ,this is a notice');
     }
   </script>
 </html>

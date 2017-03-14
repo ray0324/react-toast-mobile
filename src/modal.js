@@ -14,23 +14,28 @@ export default class Modal extends Component {
     }
 
     render() {
-        const { title, message, option, closefn } = this.props;
+        const { title, message, option, close } = this.props;
         const len = option.length;
+        const classNames = len === 2 ? 'toast-btn-item left-right' : 'toast-btn-item top-bottom';
         return (
-            <div className="toast-window">
-                { title && <div className="toast-window-hd">{ title }</div> }
-                <div className="toast-window-bd" dangerouslySetInnerHTML={{ __html: message }} ></div>
-                <div className="toast-window-ft">
-                    <div className="toast-btn-group">
-                        {
-                            option && option.map( (item, i) => <div key={i} className={ len === 2 ? 'toast-btn-item left-right' : 'toast-btn-item top-bottom' } onClick={ () => {
-                                item.fn && item.fn();
-                                closefn(this.props.id);
-                            }}>{item.text}</div>)
-                        }
+                <div className="toast-window">
+                    { title && <div className="toast-window-head">{ title }</div> }
+                    { message && <div className="toast-window-body" dangerouslySetInnerHTML={{ __html: message }} ></div> }
+                    <div className="toast-window-foot">
+                        <div className="toast-btn-group">
+                            {
+                                option.map(
+                                    (item, i) => <div key={i} className={ classNames } onClick={ () => {
+                                        item.fn && item.fn();
+                                        close(this.props.id);
+                                    } }>
+                                        {item.text}
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
         );
     };
 }
