@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Notice extends Component {
     static propTypes = {
@@ -8,7 +9,6 @@ export default class Notice extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount:', this.props);
         setTimeout(()=>{
             this.props.close(this.props.id);
         }, this.props.duration);
@@ -23,8 +23,6 @@ export default class Notice extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        // console.log('curProps:', this.props);
-        console.log('componentWillUpdate:', nextProps);
         setTimeout(()=>{
             this.props.close(this.props.id);
         }, this.props.duration);

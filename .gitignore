@@ -1,0 +1,13 @@
+/node_modules
+/.vscode
+npm-debug.log
+yarn-error.log
+# IntelliJ
+*.iml
+/.idea
+*.diff
+*.patch
+/dist
+/build
+.project
+.DS_Store

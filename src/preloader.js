@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Preloader extends Component {
     static propTypes = {
@@ -11,11 +12,8 @@ export default class Preloader extends Component {
     }
     render() {
         return (
-            <div>
-                <div className="preloader-indicator-overlay"></div>
-                <div className="preloader-indicator-modal">
-                    <span className="preloader preloader-white"></span>
-                </div>
+            <div className="preloader-indicator-modal">
+                <span className="preloader preloader-white"></span>
             </div>
         );
     };

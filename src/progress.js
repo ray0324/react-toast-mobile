@@ -1,11 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Progress extends Component {
     static propTypes = {
         percent: PropTypes.number.isRequired
-    }
-    constructor(props) {
-        super(props);
     }
 
     render() {
