@@ -1,0 +1,17 @@
+{
+  "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": ["last 3 versions","safari >= 8","android>=4","ie>=9"]
+                },
+                "modules": false,
+                "loose": true
+            }
+        ],
+        "stage-1",
+        "react"
+    ],
+    "plugins": ["transform-runtime","transform-decorators-legacy","syntax-dynamic-import"]
+}

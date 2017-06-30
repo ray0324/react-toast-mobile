@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CSSTransitionGroup } from 'react-transition-group';
 import * as TYPES from './types';
 import { E } from './eventservice';
 import Preloader from './preloader';
@@ -9,7 +10,7 @@ import Notice from './notice';
 // 生成GUID字符串
 function guid() {
     const r = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    return r() + r() + r() + '-' + r() + '_' + r() + '-' + r() + '_' + r() + r() + r();
+    return r() + r() + '-' + r() + '-' + r() + '-' + r() + '-' + r() + r() + r();
 }
 
 export default class Toast extends Component {
@@ -88,39 +89,11 @@ export default class Toast extends Component {
             this.setState({ loading: false, notices });
         });
 
-        // E.on(TYPES.SHOW_PROGRESS, txt => this.setState({
-        //     loading: false,
-        //     progress: {
-        //         txt: txt,
-        //         percent: 0,
-        //         show: true
-        //     }
-        // }));
-        //
-        // E.on(TYPES.SET_PROGRESS, percent => this.setState({
-        //     progress: {
-        //         percent: percent,
-        //         show: true
-        //     }
-        // }));
-        //
-        // E.on(TYPES.HIDE_PROGRESS, () => this.setState({
-        //     progress: {
-        //         txt: '',
-        //         percent: 0,
-        //         show: false
-        //     }
-        // }));
-
         E.on(TYPES.CLEAR, () => this.setState({
             loading: false,
             modals: []
         }));
     };
-    componentWillUpdate(nextProps, nextState) {
-        console.log('curState:', this.state);
-        console.log('nextState:', nextState);
-    }
 
     componentWillUnmount() {
         // 解绑事件
@@ -140,65 +113,71 @@ export default class Toast extends Component {
         this.setState({ notices });
     }
 
-    _renderModal() {
-        let item = this.state.modals[0];
-        if(!item) {
-            return null;
+    _render() {
+
+        if(this.state.modals.length > 0) {
+            let item = this.state.modals[0];
+            return (
+                <div>
+                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
+                    <Modal
+                        id={item.id}
+                        title={item.title}
+                        message={item.message}
+                        option={item.option}
+                        close={this.closeModal.bind(this)}
+                     />
+                </div>
+            )
         }
-        return (
-            <div className="toast-root">
-                <Modal
-                    id={item.id}
-                    title={item.title}
-                    message={item.message}
-                    option={item.option}
-                    close={this.closeModal.bind(this)}
-                 />
-            </div>
-        );
-    }
 
-    _renderNotice() {
-        let item = this.state.notices[0];
-        if(!item) {
-            return null;
+        if(this.state.notices.length > 0) {
+            let item = this.state.notices[0];
+            return (
+                <div>
+                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
+                    <Notice
+                        id={item.id}
+                        close={this.closeNotice.bind(this)}
+                        duration={item.duration}
+                        message={item.message} />
+                </div>
+            )
         }
-        return (
-            <div className="toast-root">
-                <Notice
-                    id={item.id}
-                    close={this.closeNotice.bind(this)}
-                    duration={item.duration}
-                    message={item.message} />
-           </div>
-        );
-    }
 
-    _renderPreloader() {
-        return <div className="toast-root"><Preloader/></div>;
-    }
+        if(this.state.loading) {
+            return (
+                <div>
+                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
+                    <Preloader/>
+                </div>
+            )
+        }
 
-    _renderProgress() {
-        return(
-            <div className="toast-root">
-                <Progress percent={ this.state.progress.percent } />
-            </div>
-        );
+        if(this.state.progress.show) {
+            return (
+                <div>
+                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
+                    <Progress percent={ this.state.progress.percent } />
+                </div>
+            )
+        }
+        return null;
     }
 
     render() {
-        if(this.state.modals.length > 0) {
-            return this._renderModal();
-        }
-        if(this.state.notices.length > 0) {
-            return this._renderNotice();
-        }
-        if(this.state.loading) {
-            return this._renderPreloader();
-        }
-        if(this.state.progress.show) {
-            return this._renderProgress();
-        }
-        return null;
+        return (
+            <CSSTransitionGroup
+                className="toast-root"
+                component="div"
+                transitionName="toast-test"
+                transitionAppear={false}
+                transitionEnterTimeout={250}
+                transitionLeaveTimeout={250}
+                transitionEnter={true}
+                transitionLeave={true}>
+                {this._render()}
+            </CSSTransitionGroup>
+        )
     }
 }
