@@ -36,32 +36,28 @@
 .leave() {
     .overlay{
         opacity: 1;
+        .modal{
+            opacity: 1;
+            transform: translate3d(0,0,0) scale(1)
+        }
     }
     .preloader-indicator-modal{
         opacity: 1;
         transform: translate(0,0);
-    }
-    .modal{
-        opacity: 1;
-        transform: translate3d(0,0,0) scale(1)
     }
 }
 
 .leave-active() {
     .overlay{
         opacity: 0.01;
-        transition: opacity 50ms ease-out;
+        transition: opacity 250ms ease-out;
     }
     .preloader-indicator-modal{
         opacity: 0.01;
         transform: translate(40px, 0);
-        transition: opacity 50ms ease-out, transform 50ms ease-out;
+        transition: opacity 250ms ease-out, transform 250ms ease-out;
     }
-    .modal{
-        opacity: 0;
-        transform: translate3d(0,0,0) scale(0.9);
-        transition: opacity 50ms ease-out, transform 50ms ease-out;
-    }
+
 }
 
 .@{transition-1} {
