@@ -59,7 +59,7 @@ function App() {
             }}> 确认长消息</button>
             <button onClick={()=>{
                 T.loading()
-                setTimeout(T.loaded,2000)
+                // setTimeout(T.loaded,2000)
             }}>加载中</button>
         </div>
     )

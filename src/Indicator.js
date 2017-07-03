@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Preloader extends Component {
+export default class Indicator extends Component {
     static propTypes = {
         type: PropTypes.string,
         color: PropTypes.string
@@ -12,8 +12,9 @@ export default class Preloader extends Component {
     }
     render() {
         return (
-            <div className="preloader-indicator-modal">
-                <span className="preloader preloader-white"></span>
+            <div className="indicator">
+                <i className="spinner white"></i>
+                <span className="msg">加载中</span>
             </div>
         );
     };

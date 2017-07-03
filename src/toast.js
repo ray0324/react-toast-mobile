@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import * as TYPES from './types';
 import { E } from './eventservice';
-import Preloader from './preloader';
+import Indicator from './Indicator';
 import Modal from './modal';
 // import Progress from './progress';
 import Notice from './notice';
@@ -118,54 +118,41 @@ export default class Toast extends Component {
         if(this.state.modals.length > 0) {
             let item = this.state.modals[0];
             return (
-                <div>
-                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
-                    <Modal
-                        id={item.id}
-                        title={item.title}
-                        message={item.message}
-                        option={item.option}
-                        close={this.closeModal.bind(this)}
-                     />
-                </div>
+                <Modal
+                    id={item.id}
+                    title={item.title}
+                    message={item.message}
+                    option={item.option}
+                    close={this.closeModal.bind(this)}
+                 />
             )
         }
 
         if(this.state.notices.length > 0) {
             let item = this.state.notices[0];
             return (
-                <div>
-                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
-                    <Notice
-                        id={item.id}
-                        close={this.closeNotice.bind(this)}
-                        duration={item.duration}
-                        message={item.message} />
-                </div>
+                <Notice
+                    id={item.id}
+                    close={this.closeNotice.bind(this)}
+                    duration={item.duration}
+                    message={item.message} />
             )
         }
 
         if(this.state.loading) {
-            return (
-                <div>
-                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
-                    <Preloader/>
-                </div>
-            )
+            return <Indicator/>
         }
 
         if(this.state.progress.show) {
             return (
-                <div>
-                    <div className="overlay" onTouchMove={e=>e.preventDefault()}></div>
-                    <Progress percent={ this.state.progress.percent } />
-                </div>
+                <Progress percent={ this.state.progress.percent } />
             )
         }
         return null;
     }
 
     render() {
+        const showOverlay = this.state.loading || this.state.modals.length > 0;
         return (
             <CSSTransitionGroup
                 className="toast-root"
@@ -176,6 +163,7 @@ export default class Toast extends Component {
                 transitionLeaveTimeout={50}
                 transitionEnter={true}
                 transitionLeave={true}>
+                { showOverlay && <div className="overlay" onTouchMove={e=>e.preventDefault()}></div> }
                 {this._render()}
             </CSSTransitionGroup>
         )
