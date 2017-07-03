@@ -173,7 +173,7 @@ export default class Toast extends Component {
                 transitionName="toast-test"
                 transitionAppear={false}
                 transitionEnterTimeout={250}
-                transitionLeaveTimeout={250}
+                transitionLeaveTimeout={50}
                 transitionEnter={true}
                 transitionLeave={true}>
                 {this._render()}

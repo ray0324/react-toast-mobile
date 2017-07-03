@@ -45,7 +45,7 @@ function App() {
             }}> 确认多按钮</button>
             <button onClick={()=>{
                 T.confirm({
-                    // title: '标题',
+                    // title: '标题',-
                     message: long_msg,
                     option: [{
                         text: '确定',
