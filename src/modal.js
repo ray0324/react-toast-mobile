@@ -18,6 +18,7 @@ export default class Modal extends Component {
         const { title, message, option, close } = this.props;
         const classNames = option.length === 2 ? 'modal-button double' : 'modal-button';
         return (
+            <div className="overlay overlay-modal" onTouchMove={e=>e.preventDefault()}>
                 <div className="modal">
                     <div className="modal-content-wrap">
                         { title && <div className="modal-title">{ title }</div> }
@@ -36,6 +37,7 @@ export default class Modal extends Component {
                         }
                     </div>
                 </div>
+            </div>
         );
     };
 }

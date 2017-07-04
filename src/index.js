@@ -1,4 +1,4 @@
 import './toast.less';
-import Toast from './toast';
-export { T } from './eventservice';
+import Toast from './Toast';
+export { T } from './EventService';
 export default Toast;

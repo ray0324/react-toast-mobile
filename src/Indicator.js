@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 
 export default class Indicator extends Component {
     static propTypes = {
-        type: PropTypes.string,
-        color: PropTypes.string
+        status: PropTypes.bool,
+        msg: PropTypes.string
     }
     static defaultProps = {
-        type: 'spin',
-        color: '#f60'
+        status: true,
+        msg: ''
     }
     render() {
+        const { msg } = this.props;
+        const cls = `indicator `+ (this.props.type || 'black');
         return (
-            <div className="indicator">
-                <i className="spinner white"></i>
-                <span className="msg">加载中</span>
+            <div className="overlay overlay-indicator">
+                <div className={cls}>
+                    <i className="spinner"></i>
+                    { msg && <span className="msg">{msg}</span> }
+                </div>
             </div>
         );
     };

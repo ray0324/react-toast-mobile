@@ -46,15 +46,18 @@ class EventService {
 export const E = new EventService();
 
 export const T = {
-    loading: () => E.emit(TYPES.SHOW_LOADING),
+    loading: msg => E.emit(TYPES.SHOW_LOADING,msg),
     loaded: () => E.emit(TYPES.HIDE_LOADING),
-    confirm: args => E.emit(TYPES.SHOW_CONFIRM, args),
-    alert: args => E.emit(TYPES.SHOW_ALERT, args),
-    notify: args => E.emit(TYPES.SHOW_NOTICE, args),
+    confirm: param => E.emit(TYPES.SHOW_CONFIRM, param),
+    alert: param => E.emit(TYPES.SHOW_ALERT, param),
+    notify: param => E.emit(TYPES.SHOW_NOTICE, param),
     progress: {
-        start: () => E.emit(TYPES.SHOW_PROGRESS),
-        set: progress => E.emit(TYPES.SET_PROGRESS, progress),
-        done: () => E.emit(TYPES.HIDE_PROGRESS)
+        start: text => E.emit(TYPES.SHOW_PROGRESS,text),
+        set: param => E.emit(TYPES.SET_PROGRESS, param),
+        done: (text) => {
+            E.emit(TYPES.SET_PROGRESS, { text, progress:1 });
+            setTimeout(()=>E.emit(TYPES.HIDE_PROGRESS),200)
+        }
     },
     clear: () => E.emit(TYPES.CLEAR)
 };

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ip = require('ip');
 module.exports = {
     entry: './demo/app.js',
     output: {
@@ -40,7 +41,7 @@ module.exports = {
     },
     // devserver 配置
     devServer: {
-        host: '0.0.0.0',
+        host: ip.address(),
         // port: 8080,
         hot: true,
         clientLogLevel: 'warning',

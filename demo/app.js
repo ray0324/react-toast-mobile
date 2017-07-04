@@ -1,7 +1,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import Toast , { T } from '../src/index';
 
 window.T=T;
@@ -42,7 +41,9 @@ function App() {
                         text: '取消',
                     }]
                 });
-            }}> 确认多按钮</button>
+            }}> 确认多按钮(confirm)</button>
+
+            <br/>
             <button onClick={()=>{
                 T.confirm({
                     // title: '标题',-
@@ -56,11 +57,35 @@ function App() {
                         text: '取消',
                     }]
                 });
-            }}> 确认长消息</button>
+            }}> 确认长消息(confirm)</button>
+            <br/>
+
             <button onClick={()=>{
-                T.loading()
+                T.loading('加载中')
+                setTimeout(T.loaded,2000)
+            }}>加载中(loading)</button>
+            <br/>
+            <button onClick={()=>{
+                T.progress.start('视频上传中')
+                let i = 0.1;
+                let interval = setInterval(()=>{
+                    i+=0.1*Math.random();
+                    if (i>=1) {
+                        clearInterval(interval);
+                        i=1;
+                        T.progress.done('上传完成!');
+                        return;
+                    };
+                    T.progress.set(i)
+                },200)
+
+            }}>进度条(progress)</button>
+            <br/>
+            <button onClick={()=>{
+                T.notify('密码错误')
                 // setTimeout(T.loaded,2000)
-            }}>加载中</button>
+            }}>提示(notify)</button>
+            <br/>
         </div>
     )
 }

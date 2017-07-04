@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import * as TYPES from './types';
-import { E } from './eventservice';
+import { E } from './EventService';
 import Indicator from './Indicator';
-import Modal from './modal';
-// import Progress from './progress';
-import Notice from './notice';
+import Modal from './Modal';
+import Progress from './Progress';
+import Notice from './Notice';
 
 // 生成GUID字符串
 function guid() {
@@ -18,26 +18,42 @@ export default class Toast extends Component {
     constructor() {
         super();
         this.state = {
-            loading: false,  // loading 状态
-            notices: [],
-            progress: {
-                txt: '',
-                percent: 0,
-                show: false
+            // loading 状态
+            loading: {
+                status:false,
+                msg: ''
             },
-            modals: []
+            notices: [],
+            // 模态框
+            modals: [],
+            // 进度
+            progress: {
+                text: '',
+                percent: 0,
+                status: false
+            }
         };
     }
 
     componentDidMount() {
         // 加载loading
-        E.on(TYPES.SHOW_LOADING, () => {
-            this.setState({ loading: true });
+        E.on(TYPES.SHOW_LOADING, msg => {
+            this.setState({
+                loading: {
+                    status: true,
+                    msg
+                }
+            });
         });
 
         // 关闭loading
         E.on(TYPES.HIDE_LOADING, () => {
-            this.setState({ loading: false });
+            this.setState({
+                loading:{
+                    status: false,
+                    msg:''
+                }
+            });
         });
 
         // 打开alert
@@ -87,6 +103,50 @@ export default class Toast extends Component {
                 message: args
             });
             this.setState({ loading: false, notices });
+        });
+
+        // 进度条开始
+        E.on(TYPES.SHOW_PROGRESS, text => {
+            this.setState({
+                progress:{
+                    status: true,
+                    text: text,
+                    percent: 0
+                }
+            });
+        });
+
+        // 设置进度条
+        E.on(TYPES.SET_PROGRESS, param => {
+            // 进度条100%提示
+            if(typeof param === 'object'){
+                this.setState({
+                    progress:{
+                        status: true,
+                        text: param.text || this.state.progress.text,
+                        percent: 1
+                    }
+                });
+                return;
+            }
+
+            this.setState({
+                progress:{
+                    status: true,
+                    text: this.state.progress.text,
+                    percent: param
+                }
+            });
+        });
+        // 关闭进度条
+        E.on(TYPES.HIDE_PROGRESS, () => {
+            this.setState({
+                progress: {
+                    text: '',
+                    percent: 0,
+                    status: false
+                }
+            });
         });
 
         E.on(TYPES.CLEAR, () => this.setState({
@@ -139,20 +199,19 @@ export default class Toast extends Component {
             )
         }
 
-        if(this.state.loading) {
-            return <Indicator/>
+        if(this.state.loading.status) {
+             return <Indicator {...this.state.loading} />
         }
 
-        if(this.state.progress.show) {
+        if(this.state.progress.status) {
             return (
-                <Progress percent={ this.state.progress.percent } />
+                <Progress {...this.state.progress} />
             )
         }
         return null;
     }
 
     render() {
-        const showOverlay = this.state.loading || this.state.modals.length > 0;
         return (
             <CSSTransitionGroup
                 className="toast-root"
@@ -163,7 +222,6 @@ export default class Toast extends Component {
                 transitionLeaveTimeout={50}
                 transitionEnter={true}
                 transitionLeave={true}>
-                { showOverlay && <div className="overlay" onTouchMove={e=>e.preventDefault()}></div> }
                 {this._render()}
             </CSSTransitionGroup>
         )

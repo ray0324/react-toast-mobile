@@ -30,8 +30,10 @@ export default class Notice extends Component {
 
     render() {
         return (
-            <div className="notice">
-                {this.props.message}
+            <div className="notive-wrap">
+                <div className="notice">
+                    {this.props.message}
+                </div>
             </div>
         );
     };
