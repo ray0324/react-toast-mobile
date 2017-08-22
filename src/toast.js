@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import * as TYPES from './types';
 import { E } from './EventService';
 import Indicator from './Indicator';
@@ -8,15 +9,15 @@ import Progress from './Progress';
 import Notice from './Notice';
 
 // 生成GUID字符串
-function guid() {
+const guid = () => {
     const r = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     return r() + r() + '-' + r() + '-' + r() + '-' + r() + '-' + r() + r() + r();
 }
 
 export default class Toast extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             // loading 状态
             loading: {
@@ -169,7 +170,6 @@ export default class Toast extends Component {
     // 关闭指定的小提示
     closeNotice(id) {
         let notices = this.state.notices.filter(item => item.id !== id);
-        console.log();
         this.setState({ notices });
     }
 
@@ -212,18 +212,21 @@ export default class Toast extends Component {
     }
 
     render() {
+        const item  = this._render();
         return (
-            <CSSTransitionGroup
-                className="toast-root"
-                component="div"
-                transitionName="toast-test"
-                transitionAppear={false}
-                transitionEnterTimeout={250}
-                transitionLeaveTimeout={50}
-                transitionEnter={true}
-                transitionLeave={true}>
-                {this._render()}
-            </CSSTransitionGroup>
+            <TransitionGroup>
+            {
+                item &&
+                <CSSTransition
+                    classNames="react-toast"
+                    timeout={{
+                        enter: 200,
+                        exit: 200
+                    }}>
+                    {item}
+                </CSSTransition>
+            }
+            </TransitionGroup>
         )
     }
 }

@@ -1,49 +1,37 @@
 {
   "name": "react-toast",
   "version": "1.0.0",
-  "description": "react toast component",
-  "main": "index.js",
+  "description": "Simple react toast overlay component,easily used in mobile projects",
+  "main": "./lib/react-toast.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p",
-    "dev": "webpack-dev-server --hot --open"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ray0324/react-toast.git"
+    "dev": "cross-env WEBPACK_ENV=develop webpack-dev-server --hot",
+    "examples": "cross-env WEBPACK_ENV=examples webpack",
+    "build": "cross-env WEBPACK_ENV=production webpack -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ray0324/react-toast/issues"
-  },
-  "homepage": "https://github.com/ray0324/react-toast#readme",
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
-    "babel-preset-latest": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "html-webpack-plugin": "^2.29.0",
-    "ip": "^1.1.5",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
     "less": "^2.7.2",
-    "less-loader": "^4.0.4",
+    "less-loader": "^4.0.5",
     "postcss-loader": "^2.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-transition-group": "^1.2.0"
+    "react-transition-group": "^2.2.0"
   }
 }

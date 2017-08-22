@@ -1,10 +1,10 @@
-# react-toast
+# [react-toast](https://github.com/ray0324/react-toast)
 
-## 简单的react弹窗组件
-可以在react\react-redux项目中使用
-## DEMO地址
+ 简单的react弹窗组件可以在react\react-redux移动项目中使用
 
-[https://ray0324.github.io/react-toast/demo/](https://ray0324.github.io/react-toast/demo/)
+## DEMO
+
+[https://ray0324.github.io/react-toast/examlpes/](https://ray0324.github.io/react-toast/examlpes/)
 
 ## 使用方法
 
@@ -16,12 +16,13 @@ import Toast from './components/toast';
 
 ReactDOM.render(
     <div>
-    <Toast />
-    <OtherComponent />
+        <Toast />
+        <OtherComponent />
     </div>
   , document.querySelector('.root'));
 
 ```
+
 ### 2. 在要使用的地方导入使用
 
 ```
@@ -38,7 +39,7 @@ T.alert({
     fn: () => console.log('好的')
 });
 
-// 确认
+// 确认按钮数量支持一个或多个
 T.confirm({
     title: '标题',
     message: '消息',
@@ -65,4 +66,9 @@ T.loading()
 // 加载完毕
 T.loaded()
 
+T.notify('hello toast')
+
 ```
+
+**注意:** 在构建npm包的时候为了尽可能缩小包体积，未引入babe-transform-runtime或者
+babe-polyfill包,在使用的时候需要注意引入或者做相应的低版本兼容处理

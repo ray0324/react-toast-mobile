@@ -1,61 +1,90 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ip = require('ip');
-module.exports = {
-    entry: './demo/app.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-        publicPath:  './',
-        chunkFilename: '[name].js'
+
+// 读取全局配置环境
+const env = String.prototype.trim.call(process.env.WEBPACK_ENV) || 'production';
+
+const entry = {
+    develop: './examples.js',
+    production: './src/index.js',
+    examples: './examples.js'
+}
+
+const output = {
+    develop: {
+        filename: 'examples.js',
+        path: path.resolve(__dirname, 'examples'),
+        publicPath: './'
     },
+    production: {
+        filename: 'react-toast.js',
+        path: path.resolve(__dirname, 'lib'),
+        publicPath: './',
+        libraryTarget: 'umd',
+        library: 'ReactToast'
+    },
+    examples: {
+        filename: 'examples.js',
+        path: path.resolve(__dirname, 'examples'),
+        publicPath: './'
+    }
+}
+
+const externals = {
+    develop: {},
+    examples: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'prop-types': 'PropTypes',
+        'react-transition-group': 'ReactTransitionGroup',
+        'react-toast': 'ReactToast'
+    },
+    production: {
+        'react': 'React',
+        'react-dom': 'ReactDOM',
+        'prop-types': 'PropTypes',
+        'react-transition-group': 'ReactTransitionGroup'
+    }
+}
+
+module.exports = {
+    entry: entry[env],
+    output: output[env],
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
-            },
-            {
-                test: /\.json$/,
-                use: ['json-loader']
-            },
-            {
+            }, {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    publicPath: '../',
+                    publicPath: './',
                     use: ['css-loader', 'postcss-loader']
                 })
-            },
-            {
+            }, {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    publicPath: '../',
+                    publicPath: './',
                     use: ['css-loader', 'postcss-loader', 'less-loader']
                 })
             }
         ]
     },
-    // devserver 配置
+    // deps
+    externals: externals[env],
+    // devserver config
     devServer: {
-        host: ip.address(),
-        // port: 8080,
+        host: '0.0.0.0',
+        port: 8080,
         hot: true,
         clientLogLevel: 'warning',
         historyApiFallback: true,
         disableHostCheck: true,
-        contentBase: './dist',
-        publicPath: '/',
+        contentBase: './examples',
+        publicPath: '/'
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './index.html',
-            hash: true
-        }),
-        new ExtractTextPlugin('css/[name].css'),
-    ]
+    plugins: [new ExtractTextPlugin('react-toast.css')]
 };

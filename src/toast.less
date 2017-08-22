@@ -1,5 +1,6 @@
 // 动画名称前缀
-@transition-1: toast-test;
+@transition-1: react-toast;
+
 @zIndex: 10000;
 @navHeight: 50px;
 
@@ -7,7 +8,6 @@
     &.overlay {
         opacity: 0.01;
     }
-
     .modal {
         transform: translate3d(0,0,0) scale(1.185);
     }
@@ -16,17 +16,17 @@
 .enter-active() {
     &.overlay {
         opacity: 1;
-        transition: opacity 250ms ease-in;
+        transition: opacity 200ms ease-in;
     }
 
     .modal {
         opacity: 1;
         transform: translate3d(0,0,0) scale(1);
-        transition: opacity 250ms ease-in, transform 250ms ease-in;
+        transition: opacity 200ms ease-in,transform 200ms ease-in;
     }
 }
 
-.leave() {
+.exit() {
     &.overlay {
         opacity: 1;
     }
@@ -34,44 +34,31 @@
     .modal {
         opacity: 1;
         transform: translate3d(0,0,0) scale(1);
+        transition: opacity 200ms ease-out;
     }
 }
 
-.leave-active() {
-    .overlay {
+.exit-active() {
+    &.overlay {
         opacity: 0.01;
-        transition: opacity 250ms ease-out;
+        transition: opacity 200ms ease-out;
     }
 }
 
 .@{transition-1} {
     &-enter {
         .enter;
-
         &.@{transition-1}-enter-active {
             .enter-active;
         }
     }
 
-    &-leave {
-        .leave;
-
-        &.@{transition-1}-leave-active {
-            .leave-active;
+    &-exit {
+        .exit;
+        &.@{transition-1}-exit-active {
+            .exit-active;
         }
     }
-    // &-appear{
-    //     .overlay{
-    //         opacity: 0.01;
-    //     }
-    //     &.@{transition-1}-appear-active{
-    //         .overlay{
-    //             opacity: 1;
-    //             transition: opacity 400ms ease-in;
-    //         }
-    //
-    //     }
-    // }
 }
 
 .toast-root {
@@ -117,7 +104,6 @@
 
 .modal-inner {
     font-size: 14px;
-    // padding: 20px 15px;
     line-height: 1.5;
     word-break: break-all;
     text-align: center;
@@ -155,7 +141,7 @@
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     color: #056beb;
-
+    cursor: pointer;
     &:before {
         content: '\20';
         border-top: 1px solid #ccc;
