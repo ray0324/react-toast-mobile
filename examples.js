@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 // notice: in develop mod we should import Toast T from  src directory
 // import Toast , { T } from './src/index';
-import Toast , { T } from 'react-toast';
+import Toast , { T } from 'react-toast-mobile';
 
 window.T = T;
 

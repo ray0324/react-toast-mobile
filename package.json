@@ -1,8 +1,8 @@
 {
   "name": "react-toast-mobile",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "Simple react toast overlay component,easily used in mobile projects",
-  "main": "./lib/react-toast.js",
+  "main": "./lib/react-toast-mobile.js",
   "scripts": {
     "dev": "cross-env WEBPACK_ENV=develop webpack-dev-server --hot",
     "examples": "cross-env WEBPACK_ENV=examples webpack",
