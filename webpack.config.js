@@ -21,7 +21,7 @@ const output = {
         path: path.resolve(__dirname, 'lib'),
         publicPath: './',
         libraryTarget: 'umd',
-        library: 'ReactToast'
+        library: 'ReactToastMobile'
     },
     examples: {
         filename: 'examples.js',
@@ -37,7 +37,7 @@ const externals = {
         'react-dom': 'ReactDOM',
         'prop-types': 'PropTypes',
         'react-transition-group': 'ReactTransitionGroup',
-        'react-toast': 'ReactToast'
+        'react-toast': 'ReactToastMobile'
     },
     production: {
         'react': 'React',

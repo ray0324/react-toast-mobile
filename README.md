@@ -4,14 +4,14 @@
 
 ## DEMO
 
-[https://ray0324.github.io/react-toast/examlpes/](https://ray0324.github.io/react-toast/examlpes/)
+[https://ray0324.github.io/react-toast/examples/](https://ray0324.github.io/react-toast/examples/)
 
 ## 使用方法
 
 ### 1. 在项目的根组件中导入组件
 
 ```
-import Toast from './components/toast';
+import Toast from 'react-toast-mobile';
 // ... other code...
 
 ReactDOM.render(
@@ -26,7 +26,7 @@ ReactDOM.render(
 ### 2. 在要使用的地方导入使用
 
 ```
-import { T } from './components/toast';
+import { T } from 'react-toast-mobile';
 
 // 弹窗
 T.alert('hello world');
