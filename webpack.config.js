@@ -33,36 +33,11 @@ const output = {
 const externals = {
     develop: {},
     examples: {
-      'react': {
-          commonjs: 'react',
-          commonjs2: 'react',
-          amd: 'react',
-          root: 'React'
-      },
-      'react-dom': {
-          commonjs: 'react-dom',
-          commonjs2: 'react-dom',
-          amd: 'react-dom',
-          root: 'ReactDOM'
-      },
-      'prop-types': {
-          commonjs: 'prop-types',
-          commonjs2: 'prop-types',
-          amd: 'prop-types',
-          root: 'PropTypes'
-      },
-      'react-transition-group': {
-          commonjs: 'react-transition-group',
-          commonjs2: 'react-transition-group',
-          amd: 'react-transition-group',
-          root: 'ReactTransitionGroup'
-      },
-      'react-toast-mobile': {
-        commonjs: 'react-toast-mobile',
-        commonjs2: 'react-toast-mobile',
-        amd: 'react-toast-mobile',
-        root: 'ReactToastMobile'
-      }
+      'react': 'React',
+      'react-dom': 'ReactDOM',
+      'prop-types': 'PropTypes',
+      'react-transition-group': 'ReactTransitionGroup',
+      'react-toast-mobile': 'ReactToastMobile',
     },
     production: {
       'react': {
