@@ -1,6 +1,6 @@
 {
   "name": "react-toast-mobile",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simple react toast overlay component,easily used in mobile projects",
   "main": "./lib/react-toast-mobile.js",
   "scripts": {
@@ -8,6 +8,10 @@
     "examples": "cross-env WEBPACK_ENV=examples webpack",
     "build": "cross-env WEBPACK_ENV=production webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ray0324/react-toast-mobile.git"
   },
   "keywords": [],
   "author": "",
