@@ -1,4 +1,4 @@
-# [react-toast](https://github.com/ray0324/react-toast)
+# [react-toast-mobile](https://github.com/ray0324/react-toast-mobile)
 
  简单的react弹窗组件可以在react\react-redux移动项目中使用
 
