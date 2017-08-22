@@ -1,10 +1,12 @@
-# [react-toast](https://github.com/ray0324/react-toast)
+# [react-toast-mobile](https://github.com/ray0324/react-toast-mobile)
 
- 简单的react弹窗组件可以在react\react-redux移动项目中使用
+[![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/react-toast-mobile)
+
+简单的react弹窗组件可以在react\react-redux移动项目中使用
 
 ## DEMO
 
-[https://ray0324.github.io/react-toast/examples/](https://ray0324.github.io/react-toast/examples/)
+[https://ray0324.github.io/react-toast-mobile/examples/](https://ray0324.github.io/react-toast-mobile/examples/)
 
 ## 使用方法
 
